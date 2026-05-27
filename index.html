@@ -268,12 +268,12 @@ footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,.07);paddi
       <p class="ph-text">替換為你的封面主視覺</p>
     </div>
     <div class="hero-stat">
-      <div class="s-num">42</div>
+      <div class="s-num" id="article-count">0</div>
       <div class="s-label">篇旅遊記事</div>
     </div>
     <div class="hero-badge">
       <p class="b-label">最新文章</p>
-      <p class="b-title">出國不小心就吃很多？嗯，我是</p>
+      <p class="b-title" id="latest-article">載入中…</p>
     </div>
   </div>
 </section>
@@ -435,6 +435,33 @@ footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,.07);paddi
 </footer>
 
 <script>
+// 自動計算文章數與最新文章
+function updateHeroStats() {
+  const cards = document.querySelectorAll('#article-grid .card');
+
+  // 文章總數
+  document.getElementById('article-count').textContent = cards.length;
+
+  // 找最新文章（依照 card-date 排序）
+  let latest = null;
+  let latestDate = '';
+  cards.forEach(card => {
+    const dateEl = card.querySelector('.card-date');
+    const titleEl = card.querySelector('.card-name');
+    if (dateEl && titleEl) {
+      const date = dateEl.textContent.replace('·', '').replace(/\s/g, '');
+      if (date > latestDate) {
+        latestDate = date;
+        latest = titleEl.textContent;
+      }
+    }
+  });
+  if (latest) {
+    document.getElementById('latest-article').textContent = latest;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateHeroStats);
 function filterCat(btn, cat) {
   document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
