@@ -500,5 +500,20 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
+<!-- 瀏覽人次計數器 -->
+<div style="
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  background:var(--cream);border:0.5px solid var(--border);
+  padding:.6rem 1rem;border-radius:2px;
+  display:flex;align-items:center;gap:.6rem;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+  z-index:99;
+">
+  <span style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-family:'Noto Serif TC',serif;">訪客</span>
+  <img src="https://hits.sh/violaintravel.github.io/Viola-in-Travel.svg?style=flat&label=&color=9E7D65&labelColor=F0EDE8"
+    alt="visitor count"
+    style="height:16px;vertical-align:middle;">
+</div>
+
 </body>
 </html>
